@@ -142,3 +142,5 @@ bower_components/
 .nuxt/
 .vuepress/dist
 public/
+
+.history/
