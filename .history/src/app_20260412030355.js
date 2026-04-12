@@ -695,97 +695,8 @@ function sortFileList(col, dir) {
 // ============================================================================
 // APPEND FILES TO LIST
 // ============================================================================
-// function append_files_to_list(path, files) {
-//     const $list = $('#list');
-//     const is_lastpage_loaded = null === $list.data('nextPageToken');
-//     const is_firstpage = '0' == $list.data('curPageIndex');
-
-//     let html = '';
-//     let totalsize = 0;
-//     let is_file = false;
-
-//     for (const i in files) {
-//         const item = files[i];
-//         const ep = encodeURIComponent(item.name).replace(/\//g, '%2F') + '/';
-//         const p  = path + ep.replace(/#/g, '%23').replace(/\?/g, '%3F');
-//         item['modifiedTime'] = utc2delhi(item['modifiedTime']);
-
-//         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-//             html += `<a href="${p}" class="gdi-row countitems" data-name="${escHtml(item.name.toLowerCase())}" data-date="${item['modifiedTime'] || ''}">
-//   <span class="gdi-row-icon"><i class="bi bi-folder-fill gdi-icon-folder"></i></span>
-//   <span class="gdi-row-name">${escHtml(item.name)}</span>
-//   <span class="gdi-row-size"></span>
-//   <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
-//   <span class="gdi-row-acts"></span>
-// </a>`;
-//         } else {
-//             const rawSize = Number(item.size);
-//             totalsize += rawSize;
-//             item['size'] = formatFileSize(item['size']);
-//             is_file = true;
-//             const ext = item.fileExtension;
-//             const link = UI.second_domain_for_dl ? UI.downloaddomain + item.link : window.location.origin + item.link;
-//             const encodedName = encodeURIComponent(item.name);
-//             let pn = path + encodedName + '?a=view';
-
-//             const rawFilePath = path + encodedName;
-//             if (is_lastpage_loaded && item.name == 'README.md' && UI.render_readme_md) {
-//                 get_file(rawFilePath, item, function(data) {
-//                     markdown('#readme_md', data);
-//                     $('img').addClass('img-fluid');
-//                 });
-//             }
-//             if (item.name == 'HEAD.md' && UI.render_head_md) {
-//                 get_file(rawFilePath, item, function(data) {
-//                     markdown('#head_md', data);
-//                     $('img').addClass('img-fluid');
-//                 });
-//             }
-
-//             const gdocType = GDOC_TYPES[item.mimeType];
-//             const rowIcon = gdocType ? gdocType.icon : getFileIcon(ext);
-//             const exportLinks = gdocType && UI.display_download
-//                 ? gdocType.formats.map(f => `<a class="gdi-act-btn" href="${link}&fmt=${f.ext}" title="Export as ${f.label}" download><span style="font-size:10px;font-weight:600;">${f.label}</span></a>`).join('')
-//                 : '';
-
-//             html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
-//   ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
-//   <span class="gdi-row-icon">${rowIcon}</span>
-//   <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
-//   <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
-//   <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
-//   <span class="gdi-row-acts">
-//     ${UI.allow_selecting_files ? `<button class="gdi-act-btn" onclick="copyShareUrl(this.closest('.gdi-row').querySelector('.gdi-row-name').href)" title="Copy link"><i class="bi bi-link-45deg"></i></button>` : ''}
-//     ${gdocType ? exportLinks : (UI.display_download ? `<a class="gdi-act-btn" href="${link}" title="Download"><i class="bi bi-download"></i></a>` : '')}
-//   </span>
-// </div>`;
-//         }
-//     }
-
-//     if (is_file && UI.allow_selecting_files) {
-//         document.getElementById('select_items').style.display = 'flex';
-//     }
-
-//     $list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
-//     _folderFilterBound = false;
-//     initFolderFilter();
-//     initColumnSort();
-
-//     if (is_lastpage_loaded) {
-//         const total_size  = formatFileSize(totalsize) || '0 Bytes';
-//         const total_items = $list.find('.countitems').length;
-//         const total_files = $list.find('.size_items').length;
-//         const itemText = total_items === 0 ? 'Empty folder' : `${total_items} item${total_items === 1 ? '' : 's'}`;
-//         const sizeText = total_files > 0 ? ` &middot; ${total_files} file${total_files === 1 ? '' : 's'}, ${total_size}` : '';
-//         $('#count').addClass('show').html(itemText + sizeText);
-//     }
-// }
-
 function append_files_to_list(path, files) {
     const $list = $('#list');
-    // Ensure the list container is a Bootstrap row for the grid to work
-    $list.addClass('row'); 
-    
     const is_lastpage_loaded = null === $list.data('nextPageToken');
     const is_firstpage = '0' == $list.data('curPageIndex');
 
@@ -800,18 +711,14 @@ function append_files_to_list(path, files) {
         item['modifiedTime'] = utc2delhi(item['modifiedTime']);
 
         if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-            // FOLDERS as squares
-            html += `
-            <div class="col-6 col-md-4 col-lg-3 mb-4 countitems" data-name="${escHtml(item.name.toLowerCase())}">
-                <a href="${p}" class="gdi-grid-card shadow-sm text-center d-block p-3 text-decoration-none">
-                    <div class="gdi-grid-icon mb-2">
-                        <i class="bi bi-folder-fill gdi-icon-folder" style="font-size: 3rem;"></i>
-                    </div>
-                    <div class="gdi-grid-name text-truncate fw-bold">${escHtml(item.name)}</div>
-                </a>
-            </div>`;
+            html += `<a href="${p}" class="gdi-row countitems" data-name="${escHtml(item.name.toLowerCase())}" data-date="${item['modifiedTime'] || ''}">
+  <span class="gdi-row-icon"><i class="bi bi-folder-fill gdi-icon-folder"></i></span>
+  <span class="gdi-row-name">${escHtml(item.name)}</span>
+  <span class="gdi-row-size"></span>
+  <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
+  <span class="gdi-row-acts"></span>
+</a>`;
         } else {
-            // FILES as squares
             const rawSize = Number(item.size);
             totalsize += rawSize;
             item['size'] = formatFileSize(item['size']);
@@ -821,37 +728,37 @@ function append_files_to_list(path, files) {
             const encodedName = encodeURIComponent(item.name);
             let pn = path + encodedName + '?a=view';
 
-            const gdocType = GDOC_TYPES[item.mimeType];
-            let rowIcon = gdocType ? gdocType.icon : getFileIcon(ext);
-
-            // THUMBNAIL LOGIC: If it's a video and has a thumb, use it
-            if (item.thumbnailLink && FILE_TYPES.video.includes(ext)) {
-                const highResThumb = item.thumbnailLink.replace('=s220', '=s400');
-                rowIcon = `<img src="${highResThumb}" class="img-fluid rounded" style="width: 100%; height: 120px; object-fit: cover;">`;
-            } else if (gdocType) {
-                // Keep icons for Google Docs
-            } else {
-                // Standard file icon with larger size
-                rowIcon = `<div style="font-size: 3rem;">${rowIcon}</div>`;
+            const rawFilePath = path + encodedName;
+            if (is_lastpage_loaded && item.name == 'README.md' && UI.render_readme_md) {
+                get_file(rawFilePath, item, function(data) {
+                    markdown('#readme_md', data);
+                    $('img').addClass('img-fluid');
+                });
+            }
+            if (item.name == 'HEAD.md' && UI.render_head_md) {
+                get_file(rawFilePath, item, function(data) {
+                    markdown('#head_md', data);
+                    $('img').addClass('img-fluid');
+                });
             }
 
-            html += `
-            <div class="col-6 col-md-4 col-lg-3 mb-4 countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}">
-                <div class="gdi-grid-card shadow-sm h-100 d-flex flex-column p-2">
-                    <a href="${pn}" class="text-decoration-none text-reset">
-                        <div class="gdi-grid-thumb-wrap mb-2 bg-dark d-flex align-items-center justify-content-center rounded" style="height: 120px; overflow: hidden;">
-                            ${rowIcon}
-                        </div>
-                        <div class="gdi-grid-name fw-bold text-truncate px-1" title="${escHtml(item.name)}">${escHtml(item.name)}</div>
-                    </a>
-                    <div class="mt-auto d-flex justify-content-between align-items-center p-1 border-top mt-2">
-                        <small class="text-muted">${item['size']}</small>
-                        <div class="gdi-grid-actions">
-                             ${UI.display_download ? `<a href="${link}" class="btn btn-sm btn-outline-primary py-0 px-1" title="Download"><i class="bi bi-download"></i></a>` : ''}
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+            const gdocType = GDOC_TYPES[item.mimeType];
+            const rowIcon = gdocType ? gdocType.icon : getFileIcon(ext);
+            const exportLinks = gdocType && UI.display_download
+                ? gdocType.formats.map(f => `<a class="gdi-act-btn" href="${link}&fmt=${f.ext}" title="Export as ${f.label}" download><span style="font-size:10px;font-weight:600;">${f.label}</span></a>`).join('')
+                : '';
+
+            html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
+  ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
+  <span class="gdi-row-icon">${rowIcon}</span>
+  <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
+  <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
+  <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
+  <span class="gdi-row-acts">
+    ${UI.allow_selecting_files ? `<button class="gdi-act-btn" onclick="copyShareUrl(this.closest('.gdi-row').querySelector('.gdi-row-name').href)" title="Copy link"><i class="bi bi-link-45deg"></i></button>` : ''}
+    ${gdocType ? exportLinks : (UI.display_download ? `<a class="gdi-act-btn" href="${link}" title="Download"><i class="bi bi-download"></i></a>` : '')}
+  </span>
+</div>`;
         }
     }
 
@@ -860,7 +767,18 @@ function append_files_to_list(path, files) {
     }
 
     $list.html(($list.data('curPageIndex') == '0' ? '' : $list.html()) + html);
-    // ... rest of your function (initFolderFilter, sorting, etc.) stays the same ...
+    _folderFilterBound = false;
+    initFolderFilter();
+    initColumnSort();
+
+    if (is_lastpage_loaded) {
+        const total_size  = formatFileSize(totalsize) || '0 Bytes';
+        const total_items = $list.find('.countitems').length;
+        const total_files = $list.find('.size_items').length;
+        const itemText = total_items === 0 ? 'Empty folder' : `${total_items} item${total_items === 1 ? '' : 's'}`;
+        const sizeText = total_files > 0 ? ` &middot; ${total_files} file${total_files === 1 ? '' : 's'}, ${total_size}` : '';
+        $('#count').addClass('show').html(itemText + sizeText);
+    }
 }
 
 // ============================================================================

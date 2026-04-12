@@ -1060,18 +1060,3 @@ body.embed-mode #content { padding-top: 0 !important; }
   .gdi-nav-search { max-width: 160px; }
   .gdi-viewer { padding: 0 8px; }
 }
-
-.gdi-grid-card {
-    background: var(--bs-tertiary-bg);
-    border: 1px solid rgba(0,0,0,0.1);
-    transition: transform 0.2s ease-in-out;
-}
-.gdi-grid-card:hover {
-    transform: translateY(-5px);
-}
-.gdi-grid-name {
-    font-size: 0.85rem;
-    color: var(--bs-body-color);
-}
-/* Ensure the row doesn't have list-style spacing */
-.gdi-row { display: none !important; }
