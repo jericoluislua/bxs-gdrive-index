@@ -825,7 +825,7 @@ function append_files_to_list(path, files) {
             let rowIcon = gdocType ? gdocType.icon : getFileIcon(ext);
 
             // THUMBNAIL LOGIC: If it's a video and has a thumb, use it
-            if (item.thumbnailLink && FILE_TYPES.video.includes(ext)) {
+            if (item.thumbnailLink && FILE_TYPES.video.includes(ext.toLowerCase())) {
                 const highResThumb = item.thumbnailLink.replace('=s220', '=s400');
                 rowIcon = `<img src="${highResThumb}" class="img-fluid rounded" style="width: 100%; height: 120px; object-fit: cover;">`;
             } else if (gdocType) {
@@ -1205,7 +1205,7 @@ function dispatchFileView(obj, cookie_folder_id) {
 
     if (mimeType && GDOC_TYPES[mimeType]) {
         file_workspace(name, size, mimeType, url);
-    } else if (FILE_TYPES.video.includes(ext) || (mimeType && mimeType.includes('video'))) {
+    } else if (FILE_TYPES.video.includes(ext.toLowerCase()) || (mimeType && mimeType.includes('video'))) {
         const poster = obj.thumbnailLink ? obj.thumbnailLink.replace('s220', 's0') : UI.poster;
         file_video(name, encoded_name, size, poster, url, mimeType, file_id, cookie_folder_id);
     } else if (FILE_TYPES.audio.includes(ext) || (mimeType && mimeType.includes('audio'))) {
