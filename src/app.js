@@ -825,14 +825,25 @@ function append_files_to_list(path, files) {
             let rowIcon = gdocType ? gdocType.icon : getFileIcon(ext);
 
             // THUMBNAIL LOGIC: If it's a video and has a thumb, use it
-            if (item.thumbnailLink && FILE_TYPES.video.includes(ext.toLowerCase())) {
-                const highResThumb = item.thumbnailLink.replace('=s220', '=s400');
-                rowIcon = `<img src="${highResThumb}" class="img-fluid rounded" style="width: 100%; height: 120px; object-fit: cover;">`;
-            } else if (gdocType) {
-                // Keep icons for Google Docs
-            } else {
-                // Standard file icon with larger size
-                rowIcon = `<div style="font-size: 3rem;">${rowIcon}</div>`;
+            // if (item.thumbnailLink && FILE_TYPES.video.includes(ext.toLowerCase())) {
+            //     const highResThumb = item.thumbnailLink.replace('=s220', '=s400');
+            //     rowIcon = `<img src="${highResThumb}" class="img-fluid rounded" style="width: 100%; height: 120px; object-fit: cover;">`;
+            // } else if (gdocType) {
+            //     // Keep icons for Google Docs
+            // } else {
+            //     // Standard file icon with larger size
+            //     rowIcon = `<div style="font-size: 3rem;">${rowIcon}</div>`;
+            // }
+            if (item.thumbnailLink) {
+                // If it's an image or video, try to show the thumb
+                const isVisual = FILE_TYPES.video.includes(ext) || FILE_TYPES.image.includes(ext);
+                if (isVisual) {
+                    const thumbUrl = item.thumbnailLink.replace('=s220', '=s400');
+                    rowIcon = `<img src="${thumbUrl}" class="img-fluid rounded" 
+                                referrerpolicy="no-referrer" 
+                                onerror="this.parentElement.innerHTML='<i class=\'bi bi-play-circle\'></i>'"
+                                style="width: 100%; height: 140px; object-fit: cover;">`;
+                }
             }
 
             html += `
