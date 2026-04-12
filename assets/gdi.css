@@ -1061,7 +1061,8 @@ body.embed-mode #content { padding-top: 0 !important; }
   .gdi-viewer { padding: 0 8px; }
 }
 
-.gdi-grid-card {
+/* custom code */
+/* .gdi-grid-card {
     background: var(--bs-tertiary-bg);
     border: 1px solid rgba(0,0,0,0.1);
     transition: transform 0.2s ease-in-out;
@@ -1073,47 +1074,4 @@ body.embed-mode #content { padding-top: 0 !important; }
     font-size: 0.85rem;
     color: var(--bs-body-color);
 }
-/* Ensure the row doesn't have list-style spacing */
-.gdi-row { display: none !important; }
-
-/* Fix Navbar Alignment */
-.gdi-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    height: 54px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1030;
-    background-color: var(--bs-primary-bg-subtle);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.gdi-nav-inner {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.gdi-nav-search {
-    flex-grow: 1;
-    margin: 0 20px;
-}
-
-/* Fix the content overlap */
-#content {
-    padding-top: 70px !important; /* Adjust based on your header height */
-}
-
-/* Ensure icons and text are inline */
-.gdi-logo, .gdi-nav-btn {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    gap: 8px;
-}
+.gdi-row { display: none !important; } */
