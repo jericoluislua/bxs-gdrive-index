@@ -762,10 +762,7 @@ function append_files_to_list(path, files) {
                 html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
                     ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
                     <span class="gdi-row-icon">
-                        <img 
-                            src="https://drive.google.com/thumbnail?authuser=0&sz=w320&id=${item.id}"
-                            style="width:100%; height:100%; object-fit:cover;"
-                        >
+                        <span>test</span>
                     </span>
                     <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
                     <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
