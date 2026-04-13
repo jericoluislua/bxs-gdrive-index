@@ -763,7 +763,7 @@ function append_files_to_list(path, files) {
                     ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
                     <span class="gdi-row-icon">
                         <img 
-                            src="https://drive.google.com/thumbnail?authuser=0&sz=w320&id=${item.id}"
+                            src="https://drive.google.com/thumbnail?id=${item.id}&sz=w320"
                             style="width:100%; height:100%; object-fit:cover;"
                         >
                     </span>
