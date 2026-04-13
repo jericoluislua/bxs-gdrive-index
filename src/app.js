@@ -760,6 +760,7 @@ function append_files_to_list(path, files) {
 //   </span>
 // </div>`;
             const cleanItemId = item.id.split(" ")[0];
+            console.log(cleanItemId);
                 html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
                     ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
                     <span class="gdi-row-icon">
