@@ -764,7 +764,7 @@ function append_files_to_list(path, files) {
                     <span class="gdi-row-icon">
                         <img 
                             src="https://drive.google.com/thumbnail?id=${item.id}&sz=w320"
-                            onerror="this.style.display='none'"
+                            onerror="this.outerHTML=\`${rowIcon.replace(/`/g, '\\`')}\`"
                             style="width:100%; height:100%; object-fit:cover;"
                         >
                     </span>
