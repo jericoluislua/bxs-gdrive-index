@@ -748,31 +748,31 @@ function append_files_to_list(path, files) {
                 ? gdocType.formats.map(f => `<a class="gdi-act-btn" href="${link}&fmt=${f.ext}" title="Export as ${f.label}" download><span style="font-size:10px;font-weight:600;">${f.label}</span></a>`).join('')
                 : '';
 
-//             html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
-//   ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
-//   <span class="gdi-row-icon">${rowIcon}</span>
-//   <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
-//   <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
-//   <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
-//   <span class="gdi-row-acts">
-//     ${UI.allow_selecting_files ? `<button class="gdi-act-btn" onclick="copyShareUrl(this.closest('.gdi-row').querySelector('.gdi-row-name').href)" title="Copy link"><i class="bi bi-link-45deg"></i></button>` : ''}
-//     ${gdocType ? exportLinks : (UI.display_download ? `<a class="gdi-act-btn" href="${link}" title="Download"><i class="bi bi-download"></i></a>` : '')}
-//   </span>
-// </div>`;
+            html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
+                ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
+                <span class="gdi-row-icon">${rowIcon}</span>
+                <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
+                <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
+                <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
+                <span class="gdi-row-acts">
+                    ${UI.allow_selecting_files ? `<button class="gdi-act-btn" onclick="copyShareUrl(this.closest('.gdi-row').querySelector('.gdi-row-name').href)" title="Copy link"><i class="bi bi-link-45deg"></i></button>` : ''}
+                    ${gdocType ? exportLinks : (UI.display_download ? `<a class="gdi-act-btn" href="${link}" title="Download"><i class="bi bi-download"></i></a>` : '')}
+                </span>
+                </div>`;
             const cleanItemId = item.id.split(" ")[0];
             console.log(cleanItemId);
-                html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
-                    ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
-                    <span class="gdi-row-icon">
-                    </span>
-                    <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
-                    <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
-                    <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
-                    <span class="gdi-row-acts">
-                        ${UI.allow_selecting_files ? `<button class="gdi-act-btn" onclick="copyShareUrl(this.closest('.gdi-row').querySelector('.gdi-row-name').href)" title="Copy link"><i class="bi bi-link-45deg"></i></button>` : ''}
-                        ${gdocType ? exportLinks : (UI.display_download ? `<a class="gdi-act-btn" href="${link}" title="Download"><i class="bi bi-download"></i></a>` : '')}
-                    </span>
-                    </div>`;
+            // html += `<div class="gdi-row countitems size_items" data-name="${escHtml(item.name.toLowerCase())}" data-bytes="${rawSize}" data-date="${item['modifiedTime'] || ''}">
+            //     ${UI.allow_selecting_files ? `<input class="gdi-row-check" type="checkbox" value="${link}">` : ''}
+            //     <span class="gdi-row-icon">
+            //     </span>
+            //     <a class="gdi-row-name" href="${pn}" title="${escHtml(item.name)}" data-size="${UI.display_size ? item['size'] : ''}">${escHtml(item.name)}</a>
+            //     <span class="gdi-row-size">${UI.display_size ? item['size'] : ''}</span>
+            //     <span class="gdi-row-date">${UI.display_time ? item['modifiedTime'] : ''}</span>
+            //     <span class="gdi-row-acts">
+            //         ${UI.allow_selecting_files ? `<button class="gdi-act-btn" onclick="copyShareUrl(this.closest('.gdi-row').querySelector('.gdi-row-name').href)" title="Copy link"><i class="bi bi-link-45deg"></i></button>` : ''}
+            //         ${gdocType ? exportLinks : (UI.display_download ? `<a class="gdi-act-btn" href="${link}" title="Download"><i class="bi bi-download"></i></a>` : '')}
+            //     </span>
+            //     </div>`;
         }
     }
 
